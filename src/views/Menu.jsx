@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment, useState } from 'react';
 
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import globalStyles from '../../css/global';
-import { List, Avatar } from 'react-native-paper';
+import { List, Avatar, ActivityIndicator } from 'react-native-paper';
 
 import FirebaseContext from '../../context/contextFirebase/firebaseContext';
 import PedidoContext from '../../context/contextPedidos/pedidosContext';
 
 import { useNavigation } from '@react-navigation/native';
+import { log } from 'react-native-reanimated';
 
 const Menu = () => {
 
@@ -20,6 +21,8 @@ const Menu = () => {
     // Hook para redireccionar
     const navigation = useNavigation();
 
+    const [cargando, setCargando] = useState(false);
+
     useEffect(() => {
         obtenerProductos();
     }, []);
@@ -30,20 +33,19 @@ const Menu = () => {
                 const categoriaAnterior = menu[index - 1].categoria;
                 if(categoriaAnterior !== categoria){
                     return(
-                        <List.Subheader style={styles.separador}>{categoria.toUpperCase()}</List.Subheader>
+                        <List.Subheader style={styles.separador}>{categoria.toUpperCase()} 🍊</List.Subheader>
                     )
                 }
             }else{
                 return(
-                    <List.Subheader style={styles.separadorInicial}>{categoria.toUpperCase()}</List.Subheader>
+                    <List.Subheader style={styles.separadorInicial}>{categoria.toUpperCase()} 🍊</List.Subheader>
                 )
             }
-        
     }
 
     return ( 
         <ScrollView>
-            <View style={[globalStyles.contenedor, {marginTop: -8}]}>
+            {menu.length > 0 ? (<View style={[globalStyles.contenedor, {marginTop: -8}]}>
                 <View style={{backgroundColor: '#FFF'}}>
                     <List.Section>
                         {menu.map(( platillo, index ) => {
@@ -71,7 +73,8 @@ const Menu = () => {
                         })}
                     </List.Section>
                 </View>
-            </View>
+            </View>) : (  <ActivityIndicator style={{marginTop: 300}} animating={true} color='#3c366b' size='large' />)}
+            
         </ScrollView>
     );
 }

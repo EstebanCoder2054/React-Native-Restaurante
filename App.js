@@ -1,7 +1,7 @@
 //NOTA: Cuando una ruta está compuesta por sub-rutas (stack navigator)
 //se suele poner en vez del prop component se pone children
 //en el children va la función con todo el stack configurado
-
+import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -37,6 +37,7 @@ const App = () => {
     <>
       <FirebaseState>
         <PedidoState>
+        <StatusBar style="light" />
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{

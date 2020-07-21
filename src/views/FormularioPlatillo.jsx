@@ -61,7 +61,7 @@ const FormularioPlatillo = () => {
     return (
         <View style={globalStyles.contenedor}>
             <View style={globalStyles.contenido}> 
-                <Text style={globalStyles.titulo}>Ingresa la cantidad</Text>
+                <Text style={globalStyles.titulo}>Ingresa la cantidad 💅</Text>
                 <View style={styles.contenedorBotones}>
                     <IconButton
                         icon='minus'
